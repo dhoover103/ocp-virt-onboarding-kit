@@ -1,0 +1,74 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  creationTimestamp: null
+  labels:
+    kubevirt.io/vm: vm-rhel9
+  name: vm-rhel9
+  namespace: vm-guests
+spec:
+  dataVolumeTemplates:
+    - metadata:
+        name: rhel-9-minimal-volume
+      spec:
+        sourceRef:
+          kind: DataSource
+          name: rhel9
+          namespace: openshift-virtualization-os-images
+  running: true
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:   
+        kubevirt.io/vm: vm-rhel9
+    spec:
+      domain:
+        cpu:
+          cores: 6      
+        resources:
+          requests:
+            memory: 16384M
+        devices:
+          disks:
+          - name: rootdisk
+            disk:
+              bus: virtio
+          - name: cloudinitdisk
+            disk:
+              bus: virtio
+          interfaces:
+          - name: eth0
+            masquerade: {}
+          - name: vm-network
+            bridge: {}          
+      networks:
+      - name: eth0
+        pod: {}
+      - name: vm-network
+        multus:
+          networkName: vm-guests/br1
+      volumes:
+        - dataVolume:
+            name: rhel-9-minimal-volume
+          name: rootdisk
+        - cloudInitNoCloud:
+            userData: |-
+              #cloud-config
+              user: rhel9
+              password: rhel9 
+              chpasswd: { expire: False }
+          name: cloudinitdisk
+          # cloudInitConfigDrive: 
+          #   userData: |-
+          #     #cloud-config
+          #     user: alex
+          #     password: fedora
+          #     chpasswd: { expire: False }
+      # accessCredentials:
+      #   - sshPublicKey:
+      #       propagationMethod:
+      #         configDrive: {}
+      #       source:
+      #         secret:
+      #           secretName: authorized-keys
+                    
