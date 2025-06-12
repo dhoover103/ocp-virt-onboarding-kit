@@ -2,14 +2,12 @@ apiVersion: nmstate.io/v1
 kind: NodeNetworkConfigurationPolicy
 metadata:
   name: nncp-vm-network
-  namespace: vm-guests
+  namespace: sfg-vms
 spec:
-  nodeSelector:
-    node-role.kubernetes.io/master: ""
   desiredState:
     interfaces:
-      - name: br1
-        description: Standard Linux Brige on eno2
+      - name: br2
+        description: Standard Linux Bridge on ens2
         type: linux-bridge
         state: up
         ipv4:
@@ -19,4 +17,4 @@ spec:
             stp:
               enabled: false
           port:
-            - name: eno2
+            - name: ens2

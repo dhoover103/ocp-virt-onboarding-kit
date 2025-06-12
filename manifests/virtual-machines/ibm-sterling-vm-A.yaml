@@ -4,24 +4,27 @@ metadata:
   creationTimestamp: null
   labels:
     kubevirt.io/vm: vm-fedora
-  name: vm-fedora
+    app: ibm-sterling    
+  name: vm-fedora-a
   namespace: ibm-sterling
 spec:
-  dataVolumeTemplates:
-    - metadata:
-        name: rhel-9-minimal-volume
-      spec:
-        sourceRef:
-          kind: DataSource
-          name: rhel9
-          namespace: openshift-virtualization-os-images
   running: true
   template:
     metadata:
       creationTimestamp: null
       labels:   
         kubevirt.io/vm: vm-fedora
+        app: ibm-sterling        
     spec:
+      affinity:
+        podAntiAffinity:
+          # requiredDuringSchedulingIgnoredDuringExecution means the scheduler MUST satisfy this rule.
+          # If it cannot find a node, the pod will remain in a Pending state.
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app: ibm-sterling # Target pods that also have this label
+              topologyKey: kubernetes.io/hostname # Ensure they are on different nodes    
       domain:
         cpu:
           cores: 6      
@@ -45,7 +48,7 @@ spec:
       #   pod: {}
       - name: vm-network
         multus:
-          networkName: vm-guests/br1
+          networkName: ibm-sterling/br1
       volumes:
         - name: containerdisk
           containerDisk:
@@ -57,17 +60,4 @@ spec:
               password: fedora 
               chpasswd: { expire: False }
           name: cloudinitdisk
-          # cloudInitConfigDrive: 
-          #   userData: |-
-          #     #cloud-config
-          #     user: alex
-          #     password: fedora
-          #     chpasswd: { expire: False }
-      # accessCredentials:
-      #   - sshPublicKey:
-      #       propagationMethod:
-      #         configDrive: {}
-      #       source:
-      #         secret:
-      #           secretName: authorized-keys
                     

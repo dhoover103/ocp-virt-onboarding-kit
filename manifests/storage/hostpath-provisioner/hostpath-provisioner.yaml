@@ -6,7 +6,7 @@ spec:
   imagePullPolicy: IfNotPresent
   storagePools: 
   - name: vm-storage
-    path: "/var/lib/vms" 
+    path: "/tmp/hostdata" 
 # workload:
 #   nodeSelector:
 #     kubernetes.io/os: linux

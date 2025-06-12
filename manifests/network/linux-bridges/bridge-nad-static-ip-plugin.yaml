@@ -12,6 +12,12 @@ spec:
     "type": "cnv-bridge", 
     "bridge": "br1", 
     "macspoofchk": false,
-    "vlan": 10,   
+    "vlan": 10,
+    "ipam": {
+      "type": "static",
+      "addresses": [
+        { "address": "192.168.10.4/24" }
+      ]
+    },    
     "preserveDefaultVlan": false 
   }'
