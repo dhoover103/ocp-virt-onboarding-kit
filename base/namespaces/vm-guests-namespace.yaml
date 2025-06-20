@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: vm-guests
+  annotations:
+    docs.ocp-virt.io/category: "platform"
+    docs.ocp-virt.io/complexity: "basic"
+    docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Namespace for virtual machine workloads and related resources"
+    docs.ocp-virt.io/prerequisites: "openshift-cluster"
+    docs.ocp-virt.io/use-cases: "vm-workloads,multi-tenancy,isolation"
+  labels:
+    name: vm-guests
+    app.kubernetes.io/part-of: ocp-virt-platform
+    app.kubernetes.io/component: namespace
+    app.kubernetes.io/managed-by: kustomize 

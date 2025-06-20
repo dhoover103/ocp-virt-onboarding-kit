@@ -1,0 +1,20 @@
+# This file ensures the e2e directory is committed to Git
+# Remove this file when adding actual end-to-end test configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-e2e-tests
+  annotations:
+    docs.ocp-virt.io/category: "testing"
+    docs.ocp-virt.io/complexity: "advanced"
+    docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for end-to-end test configurations"
+    docs.ocp-virt.io/prerequisites: "test-framework,openshift-cluster"
+    docs.ocp-virt.io/use-cases: "e2e-testing,integration-testing,validation"
+data:
+  readme: |
+    This directory will contain end-to-end test configurations including:
+    - VM lifecycle testing
+    - Network connectivity tests
+    - Storage functionality tests
+    - Performance and scalability tests 

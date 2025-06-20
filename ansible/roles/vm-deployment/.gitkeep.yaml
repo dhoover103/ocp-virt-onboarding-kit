@@ -1,0 +1,20 @@
+# This file ensures the vm-deployment directory is committed to Git
+# Remove this file when adding actual Ansible role configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-vm-deployment-role
+  annotations:
+    docs.ocp-virt.io/category: "automation"
+    docs.ocp-virt.io/complexity: "intermediate"
+    docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for VM deployment Ansible role"
+    docs.ocp-virt.io/prerequisites: "ansible,openshift-virtualization"
+    docs.ocp-virt.io/use-cases: "vm-automation,bulk-deployment,vm-lifecycle"
+data:
+  readme: |
+    This directory will contain Ansible role for VM deployment including:
+    - tasks/ - VM creation and management tasks
+    - vars/ - VM configuration variables
+    - templates/ - VirtualMachine and DataVolume templates
+    - defaults/ - Default VM specifications 

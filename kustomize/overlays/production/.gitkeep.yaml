@@ -1,0 +1,20 @@
+# This file ensures the production directory is committed to Git
+# Remove this file when adding actual production overlay configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-production-overlay
+  annotations:
+    docs.ocp-virt.io/category: "kustomize"
+    docs.ocp-virt.io/complexity: "advanced"
+    docs.ocp-virt.io/environment: "production"
+    docs.ocp-virt.io/description: "Placeholder for production environment Kustomize overlay"
+    docs.ocp-virt.io/prerequisites: "kustomize,production-cluster"
+    docs.ocp-virt.io/use-cases: "production,enterprise,high-availability"
+data:
+  readme: |
+    This directory will contain production overlay configurations including:
+    - Production-specific kustomization.yaml
+    - High-availability configurations
+    - Security and compliance overlays
+    - Performance and scaling configurations 

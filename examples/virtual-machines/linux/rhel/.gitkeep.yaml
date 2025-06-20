@@ -1,0 +1,20 @@
+# This file ensures the rhel directory is committed to Git
+# Remove this file when adding actual RHEL VM configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-rhel
+  annotations:
+    docs.ocp-virt.io/category: "virtual-machines"
+    docs.ocp-virt.io/complexity: "intermediate"
+    docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for Red Hat Enterprise Linux VM configurations"
+    docs.ocp-virt.io/prerequisites: "openshift-virtualization,rhel-images"
+    docs.ocp-virt.io/use-cases: "enterprise-linux,production-workloads,rhel-vms"
+data:
+  readme: |
+    This directory will contain RHEL VM configurations including:
+    - RHEL 8 and RHEL 9 VM definitions
+    - Enterprise workload configurations
+    - Subscription management configurations
+    - Security hardened RHEL VMs 

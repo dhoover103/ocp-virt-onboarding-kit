@@ -1,0 +1,20 @@
+# This file ensures the ceph directory is committed to Git
+# Remove this file when adding actual Ceph storage configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-ceph
+  annotations:
+    docs.ocp-virt.io/category: "storage"
+    docs.ocp-virt.io/complexity: "advanced"
+    docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for Ceph distributed storage configurations"
+    docs.ocp-virt.io/prerequisites: "ceph-cluster,csi-driver"
+    docs.ocp-virt.io/use-cases: "persistent-storage,block-storage,shared-storage"
+data:
+  readme: |
+    This directory will contain Ceph storage configurations including:
+    - StorageClass definitions for RBD and CephFS
+    - CSI driver configurations
+    - Ceph cluster connection secrets
+    - Volume snapshot classes 

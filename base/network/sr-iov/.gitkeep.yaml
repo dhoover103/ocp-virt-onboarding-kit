@@ -1,0 +1,20 @@
+# This file ensures the sr-iov directory is committed to Git
+# Remove this file when adding actual SR-IOV network configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-sr-iov
+  annotations:
+    docs.ocp-virt.io/category: "networking"
+    docs.ocp-virt.io/complexity: "advanced"
+    docs.ocp-virt.io/environment: "bare-metal"
+    docs.ocp-virt.io/description: "Placeholder for SR-IOV network configurations"
+    docs.ocp-virt.io/prerequisites: "sr-iov-operator,compatible-hardware"
+    docs.ocp-virt.io/use-cases: "high-performance,low-latency,dpdk"
+data:
+  readme: |
+    This directory will contain SR-IOV network configurations including:
+    - SriovNetworkNodePolicy resources
+    - SriovNetwork definitions
+    - NetworkAttachmentDefinition for SR-IOV
+    - Performance tuning configurations 

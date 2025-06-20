@@ -1,0 +1,147 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  annotations:
+    kubemacpool.io/transaction-timestamp: '2025-06-04T18:22:10.469451316Z'
+    vm.kubevirt.io/validations: |
+      [
+        {
+          "name": "minimal-required-memory",
+          "path": "jsonpath::.spec.domain.memory.guest",
+          "rule": "integer",
+          "message": "This VM requires more memory.",
+          "min": 2147483648
+        }
+      ]
+  creationTimestamp: '2025-06-04T18:22:10Z'
+  generation: 1
+  labels:
+    app: fedora-vm2
+    kubevirt.io/dynamic-credentials-support: 'true'
+    vm.kubevirt.io/template: fedora-server-small
+    vm.kubevirt.io/template.namespace: openshift
+    vm.kubevirt.io/template.revision: '1'
+    vm.kubevirt.io/template.version: v0.32.2
+  name: fedora-vm2
+  namespace: vm-guests
+spec:
+  dataVolumeTemplates:
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      kind: DataVolume
+      metadata:
+        creationTimestamp: null
+        name: fedora-vm2
+      spec:
+        sourceRef:
+          kind: DataSource
+          name: fedora
+          namespace: openshift-virtualization-os-images
+        storage:
+          resources:
+            requests:
+              storage: 30Gi
+  runStrategy: RerunOnFailure
+  template:
+    metadata:
+      annotations:
+        vm.kubevirt.io/flavor: small
+        vm.kubevirt.io/os: fedora
+        vm.kubevirt.io/workload: server
+      creationTimestamp: null
+      labels:
+        kubevirt.io/domain: fedora-vm2-domain
+        kubevirt.io/size: small
+        vm-group: fedora-vms
+    spec:
+      architecture: amd64
+      # Anti-affinity rule to ensure VM schedules on different worker node
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - fedora-vm1
+            topologyKey: kubernetes.io/hostname
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  vm-group: fedora-vms
+              topologyKey: kubernetes.io/hostname
+      domain:
+        cpu:
+          cores: 1
+          sockets: 6
+          threads: 1
+        devices:
+          disks:
+            - disk:
+                bus: virtio
+              name: rootdisk
+            - disk:
+                bus: virtio
+              name: cloudinitdisk
+          interfaces:
+            - macAddress: '02:7c:b5:00:00:01'
+              masquerade: {}
+              model: virtio
+              name: default
+            - bridge: {}
+              model: virtio
+              name: overlay-network
+          rng: {}
+        features:
+          acpi: {}
+          smm:
+            enabled: true
+        firmware:
+          bootloader:
+            efi: {}
+        machine:
+          type: pc-q35-rhel9.4.0
+        memory:
+          guest: 16Gi
+        resources: {}
+      networks:
+        - name: default
+          pod: {}
+        - name: overlay-network
+          multus:
+            networkName: ovn-overlay-static
+      terminationGracePeriodSeconds: 180
+      volumes:
+        - dataVolume:
+            name: fedora-vm2
+          name: rootdisk
+        - cloudInitNoCloud:
+            userData: |-
+              #cloud-config
+              user: fedora
+              password: fedora
+              chpasswd: { expire: False }
+              hostname: fedora-vm2
+              # Configure the secondary network interface
+              write_files:
+                - path: /etc/NetworkManager/system-connections/eth1.nmconnection
+                  content: |
+                    [connection]
+                    id=eth1
+                    type=ethernet
+                    interface-name=eth1
+                    autoconnect=true
+                    
+                    [ipv4]
+                    method=auto
+                    
+                    [ipv6]
+                    method=ignore
+                  permissions: '0600'
+              runcmd:
+                - nmcli connection reload
+                - nmcli connection up eth1
+                - echo "fedora-vm2 started on node: $(cat /proc/sys/kernel/hostname)" > /var/log/vm-info.log
+          name: cloudinitdisk 

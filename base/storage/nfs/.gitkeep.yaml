@@ -1,0 +1,20 @@
+# This file ensures the nfs directory is committed to Git
+# Remove this file when adding actual NFS storage configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-nfs
+  annotations:
+    docs.ocp-virt.io/category: "storage"
+    docs.ocp-virt.io/complexity: "intermediate"
+    docs.ocp-virt.io/environment: "bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for NFS storage configurations"
+    docs.ocp-virt.io/prerequisites: "nfs-server,nfs-client-provisioner"
+    docs.ocp-virt.io/use-cases: "shared-storage,legacy-apps,file-sharing"
+data:
+  readme: |
+    This directory will contain NFS storage configurations including:
+    - NFS client provisioner deployment
+    - StorageClass for NFS volumes
+    - PersistentVolume definitions
+    - NFS server connection configurations 

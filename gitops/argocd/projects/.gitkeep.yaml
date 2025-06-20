@@ -1,0 +1,20 @@
+# This file ensures the projects directory is committed to Git
+# Remove this file when adding actual ArgoCD project configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-projects
+  annotations:
+    docs.ocp-virt.io/category: "gitops"
+    docs.ocp-virt.io/complexity: "intermediate"
+    docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for ArgoCD project configurations"
+    docs.ocp-virt.io/prerequisites: "argocd,openshift-gitops"
+    docs.ocp-virt.io/use-cases: "gitops,project-management,multi-tenancy"
+data:
+  readme: |
+    This directory will contain ArgoCD project configurations including:
+    - AppProject definitions
+    - Access control and RBAC
+    - Repository and cluster permissions
+    - Multi-tenant project isolation 

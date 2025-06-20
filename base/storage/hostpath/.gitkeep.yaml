@@ -1,0 +1,20 @@
+# This file ensures the hostpath directory is committed to Git
+# Remove this file when adding actual hostpath storage configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-hostpath
+  annotations:
+    docs.ocp-virt.io/category: "storage"
+    docs.ocp-virt.io/complexity: "basic"
+    docs.ocp-virt.io/environment: "development,testing"
+    docs.ocp-virt.io/description: "Placeholder for hostpath storage configurations"
+    docs.ocp-virt.io/prerequisites: "local-storage"
+    docs.ocp-virt.io/use-cases: "development,testing,single-node"
+data:
+  readme: |
+    This directory will contain hostpath storage configurations including:
+    - StorageClass for hostpath volumes
+    - PersistentVolume definitions
+    - Local storage configurations
+    - Development environment storage 

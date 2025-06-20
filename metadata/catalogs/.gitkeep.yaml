@@ -1,0 +1,20 @@
+# This file ensures the catalogs directory is committed to Git
+# Remove this file when adding actual metadata catalog configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-catalogs
+  annotations:
+    docs.ocp-virt.io/category: "metadata"
+    docs.ocp-virt.io/complexity: "intermediate"
+    docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for metadata catalog configurations"
+    docs.ocp-virt.io/prerequisites: "ai-tools,catalog-systems"
+    docs.ocp-virt.io/use-cases: "component-catalog,service-catalog,resource-discovery"
+data:
+  readme: |
+    This directory will contain metadata catalog configurations including:
+    - Component catalogs and registries
+    - Service discovery metadata
+    - Resource type definitions
+    - API documentation catalogs 

@@ -1,0 +1,20 @@
+# This file ensures the playbooks directory is committed to Git
+# Remove this file when adding actual Ansible playbook configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-playbooks
+  annotations:
+    docs.ocp-virt.io/category: "automation"
+    docs.ocp-virt.io/complexity: "intermediate"
+    docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for Ansible playbook configurations"
+    docs.ocp-virt.io/prerequisites: "ansible,openshift-cluster"
+    docs.ocp-virt.io/use-cases: "automation,deployment,configuration-management"
+data:
+  readme: |
+    This directory will contain Ansible playbooks including:
+    - Cluster preparation playbooks
+    - Platform deployment automation
+    - VM provisioning playbooks
+    - Day-2 operations automation 
