@@ -1,5 +1,16 @@
 # OpenShift Virtualization Reference Architecture
 
+> **⚠️ CAUTION - ALPHA VERSION ⚠️**
+> 
+> **This project is in early alpha (v0.x) development and is rapidly evolving.**
+> 
+> - **Expect frequent breaking changes** in the coming weeks
+> - **Documentation and examples may be incomplete** or subject to major revisions
+> - **APIs, structure, and workflows will change without notice**
+> - **Not recommended for production use** at this stage
+> 
+> Please check back regularly for updates, or consider starring/watching the repository for notifications.
+
 A comprehensive, flexible, and AI-friendly reference project for deploying virtualization workloads on OpenShift with multiple deployment approaches and extensive examples.
 
 ## Project Goals on the Roadmap
