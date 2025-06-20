@@ -1,0 +1,20 @@
+# This file ensures the iscsi directory is committed to Git
+# Remove this file when adding actual iSCSI storage configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-iscsi
+  annotations:
+    docs.ocp-virt.io/category: "storage"
+    docs.ocp-virt.io/complexity: "advanced"
+    docs.ocp-virt.io/environment: "bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for iSCSI storage configurations"
+    docs.ocp-virt.io/prerequisites: "iscsi-target,multipath"
+    docs.ocp-virt.io/use-cases: "block-storage,san-storage,enterprise-storage"
+data:
+  readme: |
+    This directory will contain iSCSI storage configurations including:
+    - iSCSI target configurations
+    - Multipath device configurations
+    - StorageClass for iSCSI volumes
+    - CHAP authentication secrets 

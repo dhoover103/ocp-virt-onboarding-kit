@@ -1,0 +1,20 @@
+# This file ensures the ocp-virt-setup directory is committed to Git
+# Remove this file when adding actual Ansible role configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-ocp-virt-setup-role
+  annotations:
+    docs.ocp-virt.io/category: "automation"
+    docs.ocp-virt.io/complexity: "advanced"
+    docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for OpenShift Virtualization setup Ansible role"
+    docs.ocp-virt.io/prerequisites: "ansible,openshift-cluster,cluster-admin"
+    docs.ocp-virt.io/use-cases: "platform-setup,operator-installation,cnv-config"
+data:
+  readme: |
+    This directory will contain Ansible role for OCP Virtualization setup including:
+    - tasks/ - Operator installation and configuration tasks
+    - vars/ - Platform configuration variables
+    - templates/ - HyperConverged and operator templates
+    - handlers/ - Service restart and validation handlers 

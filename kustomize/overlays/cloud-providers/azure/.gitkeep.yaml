@@ -1,0 +1,20 @@
+# This file ensures the azure directory is committed to Git
+# Remove this file when adding actual Azure-specific overlay configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-azure-overlay
+  annotations:
+    docs.ocp-virt.io/category: "kustomize"
+    docs.ocp-virt.io/complexity: "advanced"
+    docs.ocp-virt.io/environment: "cloud"
+    docs.ocp-virt.io/description: "Placeholder for Azure-specific Kustomize overlay"
+    docs.ocp-virt.io/prerequisites: "kustomize,azure-openshift,azure-disk-csi"
+    docs.ocp-virt.io/use-cases: "azure-cloud,azure-disk,vnet-networking"
+data:
+  readme: |
+    This directory will contain Azure-specific overlay configurations including:
+    - Azure Disk storage class configurations
+    - VNet and NSG optimizations
+    - Azure load balancer configurations
+    - VM size optimizations 

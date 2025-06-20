@@ -1,0 +1,20 @@
+# This file ensures the aws directory is committed to Git
+# Remove this file when adding actual AWS-specific overlay configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-aws-overlay
+  annotations:
+    docs.ocp-virt.io/category: "kustomize"
+    docs.ocp-virt.io/complexity: "advanced"
+    docs.ocp-virt.io/environment: "cloud"
+    docs.ocp-virt.io/description: "Placeholder for AWS-specific Kustomize overlay"
+    docs.ocp-virt.io/prerequisites: "kustomize,aws-openshift,ebs-csi"
+    docs.ocp-virt.io/use-cases: "aws-cloud,ebs-storage,vpc-networking"
+data:
+  readme: |
+    This directory will contain AWS-specific overlay configurations including:
+    - AWS EBS storage class configurations
+    - VPC and security group optimizations
+    - AWS load balancer configurations
+    - EC2 instance type optimizations 

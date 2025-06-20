@@ -1,0 +1,20 @@
+# This file ensures the cnv directory is committed to Git
+# Remove this file when adding actual CNV operator configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-cnv
+  annotations:
+    docs.ocp-virt.io/category: "operators"
+    docs.ocp-virt.io/complexity: "intermediate"
+    docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for OpenShift Virtualization operator configurations"
+    docs.ocp-virt.io/prerequisites: "openshift-cluster,operator-lifecycle-manager"
+    docs.ocp-virt.io/use-cases: "virtualization,vm-management,kubevirt"
+data:
+  readme: |
+    This directory will contain CNV operator configurations including:
+    - Subscription and OperatorGroup resources
+    - HyperConverged custom resource
+    - Feature gate configurations
+    - Operator upgrade policies 

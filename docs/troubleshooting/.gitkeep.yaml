@@ -1,0 +1,20 @@
+# This file ensures the troubleshooting directory is committed to Git
+# Remove this file when adding actual troubleshooting documentation
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-troubleshooting-docs
+  annotations:
+    docs.ocp-virt.io/category: "documentation"
+    docs.ocp-virt.io/complexity: "intermediate"
+    docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for troubleshooting documentation"
+    docs.ocp-virt.io/prerequisites: "documentation-tools"
+    docs.ocp-virt.io/use-cases: "troubleshooting,debugging,problem-solving"
+data:
+  readme: |
+    This directory will contain troubleshooting documentation including:
+    - Common issues and solutions
+    - Debug procedures and commands
+    - Performance troubleshooting guides
+    - Network and storage problem resolution 

@@ -1,0 +1,20 @@
+# This file ensures the server-2022 directory is committed to Git
+# Remove this file when adding actual Windows Server 2022 VM configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-server-2022
+  annotations:
+    docs.ocp-virt.io/category: "virtual-machines"
+    docs.ocp-virt.io/complexity: "advanced"
+    docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for Windows Server 2022 VM configurations"
+    docs.ocp-virt.io/prerequisites: "openshift-virtualization,windows-images,virtio-drivers"
+    docs.ocp-virt.io/use-cases: "windows-server,active-directory,iis,sql-server"
+data:
+  readme: |
+    This directory will contain Windows Server 2022 VM configurations including:
+    - Windows Server 2022 VM definitions
+    - Active Directory configurations
+    - IIS web server configurations
+    - SQL Server database configurations 

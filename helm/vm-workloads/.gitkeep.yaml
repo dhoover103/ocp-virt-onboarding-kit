@@ -1,0 +1,20 @@
+# This file ensures the vm-workloads directory is committed to Git
+# Remove this file when adding actual VM workload Helm charts
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-vm-workloads
+  annotations:
+    docs.ocp-virt.io/category: "helm"
+    docs.ocp-virt.io/complexity: "intermediate"
+    docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for VM workload Helm charts"
+    docs.ocp-virt.io/prerequisites: "helm,openshift-virtualization"
+    docs.ocp-virt.io/use-cases: "vm-deployment,workload-templates,application-vms"
+data:
+  readme: |
+    This directory will contain VM workload Helm charts including:
+    - Database VM charts
+    - Web server VM charts
+    - Application-specific VM charts
+    - Multi-VM application deployments 

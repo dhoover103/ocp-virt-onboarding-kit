@@ -1,0 +1,20 @@
+# This file ensures the integration directory is committed to Git
+# Remove this file when adding actual integration test configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-integration-tests
+  annotations:
+    docs.ocp-virt.io/category: "testing"
+    docs.ocp-virt.io/complexity: "intermediate"
+    docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for integration test configurations"
+    docs.ocp-virt.io/prerequisites: "test-framework,openshift-cluster"
+    docs.ocp-virt.io/use-cases: "integration-testing,component-testing,api-testing"
+data:
+  readme: |
+    This directory will contain integration test configurations including:
+    - Component integration tests
+    - API validation tests
+    - Operator functionality tests
+    - Cross-component interaction tests 

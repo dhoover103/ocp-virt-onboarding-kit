@@ -1,0 +1,253 @@
+# Default values for ocp-virt-platform
+# This is a YAML-formatted file with default configuration values
+
+# Global configuration
+global:
+  # Default namespace for resources
+  namespace: vm-guests
+  
+  # Image registry configuration
+  imageRegistry: registry.redhat.io
+  
+  # Resource labels applied to all components
+  labels:
+    app.kubernetes.io/part-of: ocp-virt-platform
+    app.kubernetes.io/managed-by: helm
+  
+  # Environment type affects component selection
+  environment: cloud  # Options: cloud, bare-metal, hybrid
+
+# Namespace configuration
+namespace:
+  create: true
+  name: vm-guests
+  annotations: {}
+  labels: {}
+
+# Networking configuration
+networking:
+  # Overlay networks (recommended for cloud)
+  overlay:
+    enabled: true
+    
+    # Static IP overlay network
+    static:
+      enabled: true
+      name: ovn-overlay-static
+      subnets: "10.200.0.0/16"
+      excludeSubnets: "10.200.0.1/32"
+    
+    # DHCP-like overlay network
+    dhcp:
+      enabled: true
+      name: ovn-overlay-dhcp
+    
+    # Layer3 overlay network
+    layer3:
+      enabled: false
+      name: ovn-overlay-layer3
+      subnets: "10.100.0.0/16"
+      excludeSubnets: "10.100.0.1/32"
+  
+  # Localnet networks (for bare-metal)
+  localnet:
+    enabled: false
+    
+    # Physical network interface
+    physicalInterface: ens224
+    bridgeMapping: "physnet1:br-ex"
+    
+    # Static localnet network
+    static:
+      enabled: false
+      name: ovn-localnet-static
+      subnets: "192.168.100.0/24"
+      excludeSubnets: "192.168.100.1/32,192.168.100.100-192.168.100.200"
+    
+    # DHCP localnet network
+    dhcp:
+      enabled: false
+      name: ovn-localnet-dhcp
+    
+    # VLAN localnet network
+    vlan:
+      enabled: false
+      name: ovn-localnet-vlan
+      vlanID: 100
+      subnets: "192.168.200.0/24"
+      excludeSubnets: "192.168.200.1/32"
+  
+  # SR-IOV networking (high performance)
+  sriov:
+    enabled: false
+    # SR-IOV configuration would go here
+
+  # Linux bridges
+  linuxBridges:
+    enabled: false
+    # Linux bridge configuration would go here
+
+# Storage configuration
+storage:
+  # CSI storage classes
+  csi:
+    enabled: true
+    # Default storage class configurations
+  
+  # Hostpath provisioner
+  hostpath:
+    enabled: false
+    path: /var/lib/kubelet/hostpath-provisioner
+    storageClass:
+      name: hostpath-csi
+      reclaimPolicy: Delete
+  
+  # Ceph storage
+  ceph:
+    enabled: false
+    monitors: []
+    pool: rbd
+    userID: admin
+    storageClass:
+      name: ceph-rbd
+      reclaimPolicy: Delete
+  
+  # LVM storage
+  lvm:
+    enabled: false
+    volumeGroup: vg-ocp-virt
+    storageClass:
+      name: lvms-vg1
+      reclaimPolicy: Delete
+  
+  # NFS storage
+  nfs:
+    enabled: false
+    server: ""
+    path: "/exports"
+    storageClass:
+      name: nfs-client
+      reclaimPolicy: Delete
+
+# Security configuration
+security:
+  # Role-Based Access Control
+  rbac:
+    enabled: true
+    # Create cluster roles and bindings
+    createClusterRoles: true
+  
+  # Security Context Constraints (OpenShift)
+  scc:
+    enabled: true
+    # Custom SCCs for VMs
+    vmSCC:
+      enabled: true
+      name: vm-scc
+  
+  # Network policies
+  networkPolicies:
+    enabled: false
+    # Default deny all ingress
+    defaultDeny: true
+    # Allow egress to kube-system
+    allowKubeSystemEgress: true
+
+# Operators configuration
+operators:
+  # OpenShift Virtualization (CNV)
+  cnv:
+    enabled: true
+    # Operator configuration
+    channel: stable
+    installPlanApproval: Automatic
+    
+    # HyperConverged configuration
+    hyperconverged:
+      name: kubevirt-hyperconverged
+      featureGates:
+        - HotplugVolumes
+        - GPU
+        - HostDevices
+  
+  # NMState operator
+  nmstate:
+    enabled: false  # Only needed for localnet
+    channel: stable
+    installPlanApproval: Automatic
+  
+  # LVM operator
+  lvm:
+    enabled: false
+    channel: stable
+    installPlanApproval: Automatic
+
+# System images and templates
+systemImages:
+  enabled: true
+  
+  # Operating system images
+  images:
+    fedora:
+      enabled: true
+    rhel:
+      enabled: false
+    ubuntu:
+      enabled: false
+    windows:
+      enabled: false
+  
+  # VM templates
+  templates:
+    enabled: true
+    # Include common VM templates
+
+# Monitoring and observability
+monitoring:
+  enabled: false
+  
+  # Prometheus configuration
+  prometheus:
+    enabled: false
+    retention: 30d
+    storageSize: 10Gi
+  
+  # Grafana dashboards
+  grafana:
+    enabled: false
+    dashboards:
+      virtualization: true
+      infrastructure: true
+
+# Backup and disaster recovery
+backup:
+  enabled: false
+  
+  # Velero integration
+  velero:
+    enabled: false
+    schedule: "0 2 * * *"  # Daily at 2 AM
+    ttl: 720h  # 30 days
+
+# Resource limits and requests
+resources:
+  # Default VM resources
+  defaultVM:
+    memory: 4Gi
+    cpu: 2
+    disk: 30Gi
+  
+  # Operator resource limits
+  operators:
+    cnv:
+      limits:
+        memory: 2Gi
+        cpu: 1000m
+      requests:
+        memory: 1Gi
+        cpu: 500m
+
+# Node selector and tolerations
+nodeSelector: {}
+tolerations: []
+affinity: {} 

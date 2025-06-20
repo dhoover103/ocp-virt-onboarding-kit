@@ -1,0 +1,20 @@
+# This file ensures the clusters directory is committed to Git
+# Remove this file when adding actual Flux cluster configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-flux-clusters
+  annotations:
+    docs.ocp-virt.io/category: "gitops"
+    docs.ocp-virt.io/complexity: "advanced"
+    docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for Flux cluster configurations"
+    docs.ocp-virt.io/prerequisites: "flux,openshift-cluster"
+    docs.ocp-virt.io/use-cases: "gitops,multi-cluster,continuous-deployment"
+data:
+  readme: |
+    This directory will contain Flux cluster configurations including:
+    - Cluster definitions and bootstrapping
+    - Multi-cluster management
+    - Cluster-specific configurations
+    - Environment-based cluster settings 

@@ -1,0 +1,20 @@
+# This file ensures the disaster-recovery directory is committed to Git
+# Remove this file when adding actual disaster recovery component configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-disaster-recovery-components
+  annotations:
+    docs.ocp-virt.io/category: "kustomize"
+    docs.ocp-virt.io/complexity: "advanced"
+    docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for disaster recovery Kustomize components"
+    docs.ocp-virt.io/prerequisites: "kustomize,dr-tools"
+    docs.ocp-virt.io/use-cases: "disaster-recovery,business-continuity,failover"
+data:
+  readme: |
+    This directory will contain disaster recovery Kustomize components including:
+    - Multi-site replication configurations
+    - Failover automation components
+    - Recovery point objectives (RPO) configurations
+    - Cross-cluster recovery components 

@@ -1,0 +1,54 @@
+apiVersion: v2
+name: ocp-virt-platform
+description: A comprehensive Helm chart for deploying OpenShift Virtualization platform components
+type: application
+version: 1.0.0
+appVersion: "4.18"
+kubeVersion: ">=1.28.0"
+
+keywords:
+  - openshift
+  - virtualization
+  - kubevirt
+  - virtual-machines
+  - networking
+  - storage
+
+home: https://github.com/acmenezes/ocp-virt
+sources:
+  - https://github.com/acmenezes/ocp-virt
+
+maintainers:
+  - name: OpenShift Virtualization Reference Team
+    email: ocp-virt-reference@example.com
+
+annotations:
+  # Helm chart annotations
+  artifacthub.io/category: "virtualization"
+  artifacthub.io/license: "MIT"
+  artifacthub.io/prerelease: "false"
+  artifacthub.io/changes: |
+    - Initial release with comprehensive OpenShift Virtualization support
+    - Multi-environment networking (cloud, bare-metal, hybrid)
+    - Storage integration (CSI, hostpath, Ceph, LVM, NFS)
+    - Security policies and RBAC
+    - Monitoring and observability
+  
+  # RAG optimization annotations
+  docs.ocp-virt.io/category: "platform"
+  docs.ocp-virt.io/complexity: "intermediate"
+  docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+  docs.ocp-virt.io/description: "Comprehensive Helm chart for OpenShift Virtualization platform deployment"
+  docs.ocp-virt.io/prerequisites: "openshift-cluster,helm-v3,cluster-admin"
+  docs.ocp-virt.io/use-cases: "vm-platform,infrastructure,automation"
+
+dependencies:
+  # External charts that this chart depends on
+  # - name: prometheus-operator
+  #   version: "~51.2.0"
+  #   repository: "https://prometheus-community.github.io/helm-charts"
+  #   condition: monitoring.enabled
+  # - name: ceph-csi-rbd
+  #   version: "~3.9.0"
+  #   repository: "https://ceph.github.io/csi-charts"
+  #   condition: storage.ceph.enabled 

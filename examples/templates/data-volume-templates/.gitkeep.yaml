@@ -1,0 +1,20 @@
+# This file ensures the data-volume-templates directory is committed to Git
+# Remove this file when adding actual DataVolume template configurations
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder-data-volume-templates
+  annotations:
+    docs.ocp-virt.io/category: "templates"
+    docs.ocp-virt.io/complexity: "intermediate"
+    docs.ocp-virt.io/environment: "cloud,bare-metal,hybrid"
+    docs.ocp-virt.io/description: "Placeholder for DataVolume template configurations"
+    docs.ocp-virt.io/prerequisites: "openshift-virtualization,cdi"
+    docs.ocp-virt.io/use-cases: "disk-templates,storage-templates,image-management"
+data:
+  readme: |
+    This directory will contain DataVolume template configurations including:
+    - Template definitions for common disk configurations
+    - Image import templates
+    - Storage class specific templates
+    - Cloning and snapshot templates 
