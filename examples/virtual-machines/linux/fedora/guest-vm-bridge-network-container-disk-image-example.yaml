@@ -5,7 +5,7 @@ metadata:
   labels:
     kubevirt.io/vm: vm-fedora
   name: vm-fedora
-  namespace: ibm-sterling
+  namespace: vm-test
 spec:
   dataVolumeTemplates:
     - metadata:

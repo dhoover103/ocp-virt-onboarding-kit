@@ -4,9 +4,9 @@ metadata:
   creationTimestamp: null
   labels:
     kubevirt.io/vm: vm-fedora
-    app: ibm-sterling    
+    app: vm-test    
   name: vm-fedora-a
-  namespace: ibm-sterling
+  namespace: vm-test
 spec:
   running: true
   template:
@@ -14,7 +14,7 @@ spec:
       creationTimestamp: null
       labels:   
         kubevirt.io/vm: vm-fedora
-        app: ibm-sterling        
+        app: vm-test        
     spec:
       affinity:
         podAntiAffinity:
@@ -23,7 +23,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
                 matchLabels:
-                  app: ibm-sterling # Target pods that also have this label
+                  app: vm-test # Target pods that also have this label
               topologyKey: kubernetes.io/hostname # Ensure they are on different nodes    
       domain:
         cpu:
@@ -48,7 +48,7 @@ spec:
       #   pod: {}
       - name: vm-network
         multus:
-          networkName: ibm-sterling/br1
+          networkName: vm-test/br1
       volumes:
         - name: containerdisk
           containerDisk:
