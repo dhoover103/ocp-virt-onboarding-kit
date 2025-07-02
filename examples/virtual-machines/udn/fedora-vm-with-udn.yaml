@@ -1,0 +1,112 @@
+---
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: fedora-vm-with-udn
+  namespace: vm-guests
+  labels:
+    app: fedora-vm
+    network-type: udn-primary
+    kubevirt.io/domain: vm-with-udn
+  annotations:
+    docs.ocp-virt.io/category: "virtual-machine"
+    docs.ocp-virt.io/complexity: "intermediate"
+    docs.ocp-virt.io/environment: "openshift-4.18+"
+    docs.ocp-virt.io/description: "Fedora VM with Primary UDN Layer2 network and pod access"
+    docs.ocp-virt.io/prerequisites: "vm-layer2-network-udn,vm-layer2-nad"
+    docs.ocp-virt.io/use-cases: "vm-pod-communication,primary-network-testing"
+spec:
+  running: false
+  template:
+    metadata:
+      labels:
+        kubevirt.io/domain: vm-with-udn
+      annotations:
+        k8s.ovn.org/pod-networks: '{"default":{"ip_address":"192.168.100.10/24","mac_address":"02:03:04:05:06:07","gateway_ips":["192.168.100.1"],"ip_addresses":["192.168.100.10/24"],"network_name":"vm-guests/vm-layer2-network","role":"primary"}}'
+    spec:
+      domain:
+        devices:
+          disks:
+          - name: containerdisk
+            disk:
+              bus: virtio
+          - name: cloudinitdisk
+            disk:
+              bus: virtio
+          interfaces:
+          - name: default
+            bridge: {}
+        machine:
+          type: ""
+        resources:
+          requests:
+            memory: 2Gi
+            cpu: 1
+      networks:
+      - name: default
+        pod: {}
+      terminationGracePeriodSeconds: 180
+      volumes:
+      - name: containerdisk
+        containerDisk:
+          image: quay.io/kubevirt/fedora-cloud-container-disk-demo:latest
+      - name: cloudinitdisk
+        cloudInitNoCloud:
+          userData: |
+            #cloud-config
+            password: fedora
+            chpasswd: { expire: False }
+            runcmd:
+            - echo "Testing Primary UDN connectivity to pod services..."
+            - dnf install -y curl telnet nmap traceroute
+            - systemctl enable --now NetworkManager
+            - echo "Primary UDN network configured automatically"
+            - echo "VM setup complete - Primary network only!"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-service-for-vm
+  namespace: vm-guests
+  annotations:
+    docs.ocp-virt.io/category: "service"
+    docs.ocp-virt.io/description: "Test service for VM connectivity testing"
+spec:
+  selector:
+    app: test-pod
+  ports:
+  - port: 8080
+    targetPort: 8080
+    name: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-pod-deployment
+  namespace: vm-guests
+  annotations:
+    docs.ocp-virt.io/category: "deployment"
+    docs.ocp-virt.io/description: "Test deployment for VM-to-pod connectivity"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-pod
+  template:
+    metadata:
+      labels:
+        app: test-pod
+    spec:
+      containers:
+      - name: test-container
+        image: registry.redhat.io/ubi8/ubi-minimal:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          echo "Starting test HTTP server..."
+          while true; do
+            echo -e "HTTP/1.1 200 OK\r\nContent-Length: 50\r\n\r\nHello from pod! VM connectivity working!" | nc -l -p 8080
+          done
+        ports:
+        - containerPort: 8080 

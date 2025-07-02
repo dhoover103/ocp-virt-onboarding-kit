@@ -1,0 +1,31 @@
+---
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  name: vm-layer2-nad
+  namespace: vm-guests
+  annotations:
+    docs.ocp-virt.io/category: "networking"
+    docs.ocp-virt.io/complexity: "intermediate"
+    docs.ocp-virt.io/environment: "openshift-4.18+"
+    docs.ocp-virt.io/description: "NAD for VM Primary Layer2 UDN attachment"
+    docs.ocp-virt.io/prerequisites: "vm-layer2-network-udn"
+    docs.ocp-virt.io/use-cases: "vm-primary-network,udn-attachment"
+spec:
+  config: |
+    {
+      "cniVersion": "0.3.1",
+      "name": "vm-layer2-network",
+      "type": "ovn-k8s-cni-overlay",
+      "topology": "layer2",
+      "role": "primary",
+      "netAttachDefName": "vm-guests/vm-layer2-nad",
+      "subnets": "192.168.100.0/24",
+      "excludeSubnets": "",
+      "allowPersistentIPs": true,
+      "layer2": {
+        "subnets": ["192.168.100.0/24"],
+        "joinSubnets": ["192.168.100.0/24"],
+        "mtu": 1400
+      }
+    } 

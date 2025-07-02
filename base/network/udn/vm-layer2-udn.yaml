@@ -1,0 +1,25 @@
+---
+apiVersion: k8s.ovn.org/v1
+kind: UserDefinedNetwork
+metadata:
+  name: udn-primary
+  namespace: vm-guests
+  annotations:
+    docs.ocp-virt.io/category: "networking"
+    docs.ocp-virt.io/complexity: "intermediate"
+    docs.ocp-virt.io/environment: "openshift-4.18+"
+    docs.ocp-virt.io/description: "Primary Layer2 UDN for VMs with pod network access"
+    docs.ocp-virt.io/prerequisites: "openshift-4.18+,udn-enabled"
+    docs.ocp-virt.io/use-cases: "vm-pod-communication,primary-network,network-isolation"
+spec:
+  topology: Layer2
+  layer2:
+    role: Primary
+    subnets: 
+    - "192.168.100.0/24"
+  namespaceSelector:
+    matchLabels:
+      name: vm-guests
+  ipam:
+    lifecycle: Persistent
+

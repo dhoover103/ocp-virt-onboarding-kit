@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fedora-overlay-router
+  namespace: vm-guests
+  labels:
+    app: fedora-overlay-router
+  annotations:
+    k8s.v1.cni.cncf.io/networks: vm-guests/ovn-overlay-static
+spec:
+  serviceAccountName: fedora-overlay-router
+  containers:
+    - name: fedora
+      image: fedora:39
+      command: ["sleep", "infinity"]
+      stdin: true
+      tty: true
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          add: ["NET_ADMIN", "NET_RAW"]
+          drop: ["ALL"]
+        runAsNonRoot: false
+        seccompProfile:
+          type: RuntimeDefault
+  restartPolicy: Always 

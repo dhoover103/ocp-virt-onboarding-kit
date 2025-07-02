@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: vm-guests
+  name: udn-primary-namespace
   annotations:
     docs.ocp-virt.io/category: "platform"
     docs.ocp-virt.io/complexity: "basic"
@@ -10,7 +10,4 @@ metadata:
     docs.ocp-virt.io/prerequisites: "openshift-cluster"
     docs.ocp-virt.io/use-cases: "vm-workloads,multi-tenancy,isolation"
   labels:
-    name: vm-guests
-    app.kubernetes.io/part-of: ocp-virt-platform
-    app.kubernetes.io/component: namespace
-    app.kubernetes.io/managed-by: kustomize 
+    k8s.ovn.org/primary-user-defined-network: ""
