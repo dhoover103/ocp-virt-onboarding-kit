@@ -41,7 +41,7 @@ This section provides configurations for cloud environments where direct physica
 ### Traffic Flow in Cloud Overlay
 
 ```
-┌─────────────┐    Geneve     ┌─────────────┐
+┌─────────────┐    Geneve      ┌─────────────┐
 │   VM/Pod    │  Encapsulation │   VM/Pod    │
 │  Instance A │◄──────────────►│  Instance B │
 └─────────────┘   over Cloud   └─────────────┘
