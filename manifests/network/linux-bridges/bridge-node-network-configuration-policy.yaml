@@ -6,7 +6,7 @@ metadata:
 spec:
   desiredState:
     interfaces:
-      - name: br2
+      - name: br1
         description: Standard Linux Bridge on ens2
         type: linux-bridge
         state: up
