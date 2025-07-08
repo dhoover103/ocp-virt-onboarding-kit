@@ -1,0 +1,2 @@
+# Production environment overlay
+# Contains kustomizations specific to production environment 

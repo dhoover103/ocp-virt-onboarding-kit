@@ -1,0 +1,2 @@
+# Base kustomizations directory
+# This directory will contain base kustomization.yaml files that reference the raw manifests 
