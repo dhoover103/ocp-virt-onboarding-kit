@@ -1,0 +1,18 @@
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: bond
+spec:
+  desiredState:
+    interfaces:
+      - name: bond1 
+        description: Add vf 
+        type: bond 
+        state: up 
+        link-aggregation:
+          mode: active-backup 
+          options:
+            primary: eno2np1 
+          port: 
+            - eno2np1
+            - eno3np1
