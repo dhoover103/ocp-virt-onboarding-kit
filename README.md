@@ -1,4 +1,4 @@
-# OpenShift Virtualization Partner Labs Onboarding
+# OpenShift Virtualization Onboarding Kit
 
 **WARNING: This project is under active development and not recommended for production use yet. APIs, structure, and workflows may change without notice.**
 
@@ -6,11 +6,13 @@ A bite-size approach reference project for deploying virtualization workloads on
 
 ## Project Goals
 
-The first goal of this project is to provide ready to go, digestible pieces of configurations, with companion manifests and step by step guides for new OpenShift virtualization adopters that have no to little previous OpenShift experience and need to run functional validation on their applications. On the roadmap we consider covering more complex subjects to help advanced engineers with custom networking or storage issues and eventually cover all topics of interest to any OpenShift virtuzalization user wanting to take bite-size approaches.
+- **Ready-to-use configurations** with step-by-step guides for new OpenShift Virtualization adopters
+- **Digestible examples** for functional validation with minimal OpenShift experience required
+- **Progressive complexity** from basic setups to advanced networking and storage configurations
+- **Comprehensive coverage** of all OpenShift Virtualization topics using bite-sized approaches
+- **Multiple automation strategies** including Ansible, Helm, Kustomize, GitOps, and Hashicorp tools
 
-We also intend to publish when necessary and pertinent, automation startegies that may involve Ansible, Helm, Kustomize, GitOps tools and / or Hashicorp automation tools.
-
-**WARNING: This project DOES NOT replace the official OpenShift Virtualization trainning, which is highly recommended, nor the official documentation. Instead it is supposed to serve as a complement and a facilitator to partner and customer engineers just getting started.**
+**WARNING: This project DOES NOT replace the official OpenShift Virtualization training, which is highly recommended, nor the official documentation. Instead it is supposed to serve as a complement and a facilitator to partner and customer engineers just getting started.**
 
 ## Project Structure
 
