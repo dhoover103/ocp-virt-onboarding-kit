@@ -11,6 +11,8 @@ spec:
       deviceSelector:
         paths:
         - /dev/sdb
+        optionalPaths:
+        - /dev/sdc
       thinPoolConfig:
         name: thin-pool-1
         sizePercent: 90
