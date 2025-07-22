@@ -6,11 +6,11 @@ spec:
   desiredState:
     interfaces:
       - name: bond1 
-        description: Add vf 
-        type: bond 
-        state: up 
+        description: uplink to secondary network 
+        type: bond
+        state: up
         link-aggregation:
-          mode: active-backup 
+          mode: 802.3ad 
           options:
             primary: eno2np1 
           port: 
